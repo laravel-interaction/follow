@@ -1,21 +1,110 @@
-# Package Skeleton Laravel
+# Laravel Follow
+
+User follow/unfollow behaviour for Laravel.
+
 <p align="center">
-<a href="https://github.com/zingimmick/package-skeleton-laravel/actions"><img src="https://github.com/zingimmick/package-skeleton-laravel/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://codecov.io/gh/zingimmick/package-skeleton-laravel"><img src="https://codecov.io/gh/zingimmick/package-skeleton-laravel/branch/master/graph/badge.svg" alt="Code Coverage" /></a>
-<a href="https://packagist.org/packages/zing/package-skeleton-laravel"><img src="https://poser.pugx.org/zing/package-skeleton-laravel/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/zing/package-skeleton-laravel"><img src="https://poser.pugx.org/zing/package-skeleton-laravel/downloads" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/zing/package-skeleton-laravel"><img src="https://poser.pugx.org/zing/package-skeleton-laravel/v/unstable.svg" alt="Latest Unstable Version"></a>
-<a href="https://packagist.org/packages/zing/package-skeleton-laravel"><img src="https://poser.pugx.org/zing/package-skeleton-laravel/license" alt="License"></a>
+<a href="https://github.com/laravel-interaction/follow/actions"><img src="https://github.com/laravel-interaction/follow/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://codecov.io/gh/laravel-interaction/follow"><img src="https://codecov.io/gh/laravel-interaction/follow/branch/master/graph/badge.svg" alt="Code Coverage" /></a>
+<a href="https://packagist.org/packages/laravel-interaction/follow"><img src="https://poser.pugx.org/laravel-interaction/follow/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel-interaction/follow"><img src="https://poser.pugx.org/laravel-interaction/follow/downloads" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel-interaction/follow"><img src="https://poser.pugx.org/laravel-interaction/follow/v/unstable.svg" alt="Latest Unstable Version"></a>
+<a href="https://packagist.org/packages/laravel-interaction/follow"><img src="https://poser.pugx.org/laravel-interaction/follow/license" alt="License"></a>
+<a href="https://codeclimate.com/github/laravel-interaction/follow/maintainability"><img src="https://api.codeclimate.com/v1/badges/00926e0d1ffb6e36f097/maintainability" alt="Code Climate" /></a>
 </p>
 
 > **Requires [PHP 7.2.0+](https://php.net/releases/)**
 
-Require Package Skeleton Laravel using [Composer](https://getcomposer.org):
+Require Laravel Follow using [Composer](https://getcomposer.org):
 
 ```bash
-composer create-project zing/package-skeleton-laravel --prefer-source laravel-package
+composer require laravel-interaction/follow
 ```
+
+## Usage
+
+### Setup Follower
+
+```php
+use Illuminate\Database\Eloquent\Model;
+use LaravelInteraction\Follow\Concerns\Follower;
+
+class User extends Model
+{
+    use Follower;
+}
+```
+
+### Setup Followable
+
+```php
+use Illuminate\Database\Eloquent\Model;
+use LaravelInteraction\Follow\Concerns\Followable;
+
+class Channel extends Model
+{
+    use Followable;
+}
+```
+
+### Follower
+
+```php
+use LaravelInteraction\Follow\Tests\Models\Channel;
+/** @var \LaravelInteraction\Follow\Tests\Models\User $user */
+/** @var \LaravelInteraction\Follow\Tests\Models\Channel $channel */
+// Follow to Followable
+$user->follow($channel);
+$user->unfollow($channel);
+$user->toggleFollow($channel);
+
+// Compare Followable
+$user->hasFollowed($channel);
+$user->hasNotFollowed($channel);
+
+// Get followed info
+$user->followerFollowings()->count(); 
+
+// with type
+$user->followerFollowings()->withType(Channel::class)->count(); 
+
+// get followed channels
+Channel::query()->whereFollowedBy($user)->get();
+
+// get followed channels doesnt followed
+Channel::query()->whereNotFollowedBy($user)->get();
+```
+
+### Followable
+
+```php
+use LaravelInteraction\Follow\Tests\Models\User;
+use LaravelInteraction\Follow\Tests\Models\Channel;
+/** @var \LaravelInteraction\Follow\Tests\Models\User $user */
+/** @var \LaravelInteraction\Follow\Tests\Models\Channel $channel */
+// Compare Follower
+$channel->isFollowedBy($user); 
+$channel->isNotFollowedBy($user);
+// Get followers info
+$channel->followers->each(function (User $user){
+    echo $user->getKey();
+});
+
+$channels = Channel::query()->withCount('followers')->get();
+$channels->each(function (Channel $channel){
+    echo $channel->followers()->count(); // 1100
+    echo $channel->followers_count; // "1100"
+    echo $channel->followersCount(); // 1100
+    echo $channel->followersCountForHumans(); // "1.1K"
+});
+```
+
+### Events
+
+| Event | Fired |
+| --- | --- |
+| `LaravelInteraction\Follow\Events\Followed` | When an object get followed. |
+| `LaravelInteraction\Follow\Events\Unfollowed` | When an object get unfollowed. |
 
 ## License
 
-Package Skeleton Laravel is an open-sourced software licensed under the [MIT license](LICENSE).
+Laravel Follow is an open-sourced software licensed under the [MIT license](LICENSE).
