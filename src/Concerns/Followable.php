@@ -26,11 +26,6 @@ trait Followable
         return ! $this->isFollowedBy($user);
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $user
-     *
-     * @return bool
-     */
     public function isFollowedBy(Model $user): bool
     {
         if (! is_a($user, config('follow.models.user'))) {
@@ -69,17 +64,11 @@ trait Followable
         );
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
     public function followableFollowings(): MorphMany
     {
         return $this->morphMany(config('follow.models.following'), 'followable');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function followers(): BelongsToMany
     {
         return $this->morphToMany(

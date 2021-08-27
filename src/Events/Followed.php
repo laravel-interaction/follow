@@ -13,11 +13,6 @@ class Followed
      */
     public $following;
 
-    /**
-     * Liked constructor.
-     *
-     * @param \Illuminate\Database\Eloquent\Model $following
-     */
     public function __construct(Model $following)
     {
         $this->following = $following;

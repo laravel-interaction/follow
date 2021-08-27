@@ -20,11 +20,6 @@ trait Follower
         return ! $this->hasFollowed($object);
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
-     * @return bool
-     */
     public function hasFollowed(Model $object): bool
     {
         return ($this->relationLoaded(
@@ -35,11 +30,6 @@ trait Follower
             ->count() > 0;
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
-     * @return \LaravelInteraction\Follow\Following
-     */
     public function follow(Model $object): Following
     {
         $attributes = [
@@ -60,9 +50,6 @@ trait Follower
             });
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function followerFollowings(): HasMany
     {
         return $this->hasMany(
@@ -73,8 +60,6 @@ trait Follower
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
      * @return bool|\LaravelInteraction\Follow\Following
      */
     public function toggleFollow(Model $object)
@@ -82,11 +67,6 @@ trait Follower
         return $this->hasFollowed($object) ? $this->unfollow($object) : $this->follow($object);
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $object
-     *
-     * @return bool
-     */
     public function unfollow(Model $object): bool
     {
         $hasNotFollowed = $this->hasNotFollowed($object);
@@ -102,11 +82,6 @@ trait Follower
             ->detach($object->getKey());
     }
 
-    /**
-     * @param string $class
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
     protected function followedItems(string $class): MorphToMany
     {
         return $this->morphedByMany(
