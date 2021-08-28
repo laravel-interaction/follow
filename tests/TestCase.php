@@ -38,7 +38,7 @@ class TestCase extends BaseTestCase
         config([
             'database.default' => 'testing',
             'follow.models.user' => User::class,
-            'follow.uuids' => true,
+            'follow.uuids' => false,
         ]);
     }
 
