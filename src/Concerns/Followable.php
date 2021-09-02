@@ -31,6 +31,7 @@ trait Followable
         if (! is_a($user, config('follow.models.user'))) {
             return false;
         }
+
         $followersLoaded = $this->relationLoaded('followers');
 
         if ($followersLoaded) {

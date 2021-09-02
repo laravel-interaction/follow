@@ -73,6 +73,7 @@ trait Follower
         if ($hasNotFollowed) {
             return true;
         }
+
         $followerFollowingsLoaded = $this->relationLoaded('followerFollowings');
         if ($followerFollowingsLoaded) {
             $this->unsetRelation('followerFollowings');
