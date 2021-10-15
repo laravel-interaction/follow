@@ -25,6 +25,9 @@ use LaravelInteraction\Follow\Events\Unfollowed;
  */
 class Following extends MorphPivot
 {
+    /**
+     * @var array<string, class-string<\LaravelInteraction\Follow\Events\Followed>>|array<string, class-string<\LaravelInteraction\Follow\Events\Unfollowed>>
+     */
     protected $dispatchesEvents = [
         'created' => Followed::class,
         'deleted' => Unfollowed::class,
@@ -43,6 +46,9 @@ class Following extends MorphPivot
         );
     }
 
+    /**
+     * @var bool
+     */
     public $incrementing = true;
 
     public function getIncrementing(): bool

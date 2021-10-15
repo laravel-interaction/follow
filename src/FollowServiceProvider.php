@@ -9,5 +9,8 @@ use LaravelInteraction\Support\InteractionServiceProvider;
 
 class FollowServiceProvider extends InteractionServiceProvider
 {
+    /**
+     * @var string
+     */
     protected $interaction = InteractionList::FOLLOW;
 }

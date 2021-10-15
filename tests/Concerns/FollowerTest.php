@@ -9,7 +9,10 @@ use LaravelInteraction\Follow\Tests\Models\Channel;
 use LaravelInteraction\Follow\Tests\Models\User;
 use LaravelInteraction\Follow\Tests\TestCase;
 
-class FollowerTest extends TestCase
+/**
+ * @internal
+ */
+final class FollowerTest extends TestCase
 {
     public function testFollow(): void
     {

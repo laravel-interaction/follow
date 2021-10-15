@@ -9,22 +9,25 @@ use LaravelInteraction\Follow\Following;
 use LaravelInteraction\Follow\Tests\Models\Channel;
 use LaravelInteraction\Follow\Tests\Models\User;
 
-class FollowingTest extends TestCase
+/**
+ * @internal
+ */
+final class FollowingTest extends TestCase
 {
     /**
      * @var \LaravelInteraction\Follow\Tests\Models\User
      */
-    protected $user;
+    private $user;
 
     /**
      * @var \LaravelInteraction\Follow\Tests\Models\Channel
      */
-    protected $channel;
+    private $channel;
 
     /**
      * @var \LaravelInteraction\Follow\Following
      */
-    protected $following;
+    private $following;
 
     protected function setUp(): void
     {

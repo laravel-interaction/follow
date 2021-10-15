@@ -10,7 +10,10 @@ use LaravelInteraction\Follow\Tests\Models\Channel;
 use LaravelInteraction\Follow\Tests\Models\User;
 use LaravelInteraction\Follow\Tests\TestCase;
 
-class UnfollowedTest extends TestCase
+/**
+ * @internal
+ */
+final class UnfollowedTest extends TestCase
 {
     public function testOnce(): void
     {

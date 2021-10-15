@@ -49,7 +49,7 @@ trait Followable
     {
         return $query->whereDoesntHave(
             'followers',
-            function (Builder $query) use ($user) {
+            function (Builder $query) use ($user): \Illuminate\Database\Eloquent\Builder {
                 return $query->whereKey($user->getKey());
             }
         );
@@ -59,7 +59,7 @@ trait Followable
     {
         return $query->whereHas(
             'followers',
-            function (Builder $query) use ($user) {
+            function (Builder $query) use ($user): \Illuminate\Database\Eloquent\Builder {
                 return $query->whereKey($user->getKey());
             }
         );
@@ -92,7 +92,7 @@ trait Followable
         return (int) $this->followers_count;
     }
 
-    public function followersCountForHumans($precision = 1, $mode = PHP_ROUND_HALF_UP, $divisors = null): string
+    public function followersCountForHumans(int $precision = 1, int $mode = PHP_ROUND_HALF_UP, $divisors = null): string
     {
         return Interaction::numberForHumans(
             $this->followersCount(),
