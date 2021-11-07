@@ -13,6 +13,6 @@ use LaravelInteraction\Follow\Concerns\Follower;
  */
 class User extends Model
 {
-    use Follower;
     use Followable;
+    use Follower;
 }

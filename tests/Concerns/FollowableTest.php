@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LaravelInteraction\Follow\Tests\Concerns;
 
+use Iterator;
 use LaravelInteraction\Follow\Tests\Models\Channel;
 use LaravelInteraction\Follow\Tests\Models\User;
 use LaravelInteraction\Follow\Tests\TestCase;
@@ -16,7 +17,7 @@ final class FollowableTest extends TestCase
     /**
      * @return \Iterator<array<class-string<\LaravelInteraction\Follow\Tests\Models\Channel|\LaravelInteraction\Follow\Tests\Models\User>>>
      */
-    public function provideModelClasses(): \Iterator
+    public function provideModelClasses(): Iterator
     {
         yield [Channel::class];
         yield [User::class];
