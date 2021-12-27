@@ -17,7 +17,9 @@ class CreateFollowingsTable extends Migration
             config('follow.table_names.followings'),
             function (Blueprint $table): void {
                 config('follow.uuids') ? $table->uuid('uuid') : $table->bigIncrements('id');
-                $table->unsignedBigInteger(config('follow.column_names.user_foreign_key'))->index()->comment('user_id');
+                $table->unsignedBigInteger(config('follow.column_names.user_foreign_key'))
+                    ->index()
+                    ->comment('user_id');
                 $table->morphs('followable');
                 $table->timestamps();
                 $table->unique([config('follow.column_names.user_foreign_key'), 'followable_type', 'followable_id']);
