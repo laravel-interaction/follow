@@ -70,7 +70,7 @@ class Following extends MorphPivot
         return $this->uuids() ? 'string' : parent::getKeyType();
     }
 
-    public function getTable()
+    public function getTable(): string
     {
         return config('follow.table_names.followings') ?: parent::getTable();
     }
