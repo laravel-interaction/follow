@@ -3,6 +3,11 @@
     "description": "User follow/unfollow behaviour for Laravel.",
     "keywords": ["laravel", "following", "follow"],
     "license": "MIT",
+    "homepage": "https://github.com/laravel-interaction/follow",
+    "support": {
+        "issues": "https://github.com/laravel-interaction/follow/issues",
+        "source": "https://github.com/laravel-interaction/follow"
+    },
     "authors": [
         {
             "name": "zingimmick",
