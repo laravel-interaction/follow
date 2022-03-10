@@ -67,7 +67,7 @@ trait Followable
 
     public function followableFollowings(): MorphMany
     {
-        return $this->morphMany(config('follow.models.following'), 'followable');
+        return $this->morphMany(config('follow.models.pivot'), 'followable');
     }
 
     public function followers(): BelongsToMany
@@ -75,7 +75,7 @@ trait Followable
         return $this->morphToMany(
             config('follow.models.user'),
             'followable',
-            config('follow.models.following'),
+            config('follow.models.pivot'),
             null,
             config('follow.column_names.user_foreign_key')
         )->withTimestamps();

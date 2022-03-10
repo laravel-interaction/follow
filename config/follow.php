@@ -9,10 +9,10 @@ return [
     'uuids' => false,
     'models' => [
         'user' => \App\User::class,
-        'following' => Following::class,
+        'pivot' => Following::class,
     ],
     'table_names' => [
-        'followings' => 'followings',
+        'pivot' => 'followings',
     ],
     'column_names' => [
         'user_foreign_key' => 'user_id',

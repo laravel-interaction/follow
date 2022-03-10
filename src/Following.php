@@ -72,7 +72,7 @@ class Following extends MorphPivot
 
     public function getTable(): string
     {
-        return config('follow.table_names.followings') ?: parent::getTable();
+        return config('follow.table_names.pivot') ?: parent::getTable();
     }
 
     public function isFollowedBy(Model $user): bool

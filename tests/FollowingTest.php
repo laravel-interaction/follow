@@ -53,7 +53,7 @@ final class FollowingTest extends TestCase
 
     public function testGetTable(): void
     {
-        self::assertSame(config('follow.table_names.followings'), $this->following->getTable());
+        self::assertSame(config('follow.table_names.pivot'), $this->following->getTable());
     }
 
     public function testFollower(): void
