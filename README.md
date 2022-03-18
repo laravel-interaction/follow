@@ -9,12 +9,39 @@ User follow/unfollow behaviour for Laravel.
 <a href="https://packagist.org/packages/laravel-interaction/follow"><img src="https://poser.pugx.org/laravel-interaction/follow/license" alt="License"></a>
 </p>
 
-> **Requires [PHP 7.3+](https://php.net/releases/)**
+## Introduction
 
-Require Laravel Follow using [Composer](https://getcomposer.org):
+It let people express how they feel about the model(documentation/subject/topic).
+
+![](https://img.shields.io/badge/Follow-1.2k-brightgreen?style=social)
+
+## Installation
+
+### Requirements
+
+- [PHP 7.3+](https://php.net/releases/)
+- [Composer](https://getcomposer.org)
+- [Laravel 8.0+](https://laravel.com/docs/releases)
+
+### Instructions
+
+Require Laravel Follow using [Composer](https://getcomposer.org).
 
 ```bash
 composer require laravel-interaction/follow
+```
+
+Publish configuration and migrations
+
+```bash
+php artisan vendor:publish --tag=follow-config
+php artisan vendor:publish --tag=follow-migrations
+```
+
+Run database migrations.
+
+```bash
+php artisan migrate
 ```
 
 ## Usage
