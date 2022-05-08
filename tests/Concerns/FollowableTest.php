@@ -29,7 +29,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testFollowings($modelClass): void
+    public function testFollowings(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -43,7 +43,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testFollowersCount($modelClass): void
+    public function testFollowersCount(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -60,7 +60,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testFollowersCountForHumans($modelClass): void
+    public function testFollowersCountForHumans(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -73,7 +73,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testIsFollowedBy($modelClass): void
+    public function testIsFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -92,7 +92,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testIsNotFollowedBy($modelClass): void
+    public function testIsNotFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -111,7 +111,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testFollowers($modelClass): void
+    public function testFollowers(string $modelClass): void
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
@@ -126,7 +126,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testScopeWhereFollowedBy($modelClass): void
+    public function testScopeWhereFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $other = User::query()->create();
@@ -141,7 +141,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
-    public function testScopeWhereNotFollowedBy($modelClass): void
+    public function testScopeWhereNotFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
         $other = User::query()->create();
