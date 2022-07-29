@@ -15,7 +15,7 @@ class CreateFollowingsTable extends Migration
     {
         Schema::create(
             config('follow.table_names.pivot'),
-            function (Blueprint $table): void {
+            static function (Blueprint $table): void {
                 config('follow.uuids') ? $table->uuid('uuid') : $table->bigIncrements('id');
                 $table->unsignedBigInteger(config('follow.column_names.user_foreign_key'))
                     ->index()
