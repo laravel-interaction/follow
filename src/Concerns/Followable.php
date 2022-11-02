@@ -50,9 +50,7 @@ trait Followable
     {
         return $query->whereDoesntHave(
             'followers',
-            static function (Builder $query) use ($user): Builder {
-                return $query->whereKey($user->getKey());
-            }
+            static fn (Builder $query): Builder => $query->whereKey($user->getKey())
         );
     }
 
@@ -60,9 +58,7 @@ trait Followable
     {
         return $query->whereHas(
             'followers',
-            static function (Builder $query) use ($user): Builder {
-                return $query->whereKey($user->getKey());
-            }
+            static fn (Builder $query): Builder => $query->whereKey($user->getKey())
         );
     }
 

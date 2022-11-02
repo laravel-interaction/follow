@@ -8,13 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Followed
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Model
-     */
-    public $following;
-
-    public function __construct(Model $following)
+    public function __construct(public Model $model)
     {
-        $this->following = $following;
     }
 }

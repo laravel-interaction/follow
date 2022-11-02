@@ -55,10 +55,7 @@ trait Follower
         return $this->hasMany(config('follow.models.pivot'), config('follow.column_names.user_foreign_key'));
     }
 
-    /**
-     * @return bool|\LaravelInteraction\Follow\Following
-     */
-    public function toggleFollow(Model $object)
+    public function toggleFollow(Model $object): bool|Following
     {
         return $this->hasFollowed($object) ? $this->unfollow($object) : $this->follow($object);
     }
@@ -75,7 +72,7 @@ trait Follower
             $this->unsetRelation('followerFollowings');
         }
 
-        return (bool) $this->followedItems(\get_class($object))
+        return (bool) $this->followedItems($object::class)
             ->detach($object->getKey());
     }
 
