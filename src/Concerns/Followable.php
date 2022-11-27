@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use LaravelInteraction\Support\Interaction;
 
-use function is_a;
-
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Follow\Following[] $followableFollowings
  * @property-read \Illuminate\Database\Eloquent\Collection|\LaravelInteraction\Follow\Concerns\Follower[] $followers
