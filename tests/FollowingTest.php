@@ -32,45 +32,45 @@ final class FollowingTest extends TestCase
 
     public function testFollowingTimestamp(): void
     {
-        self::assertInstanceOf(Carbon::class, $this->following->created_at);
-        self::assertInstanceOf(Carbon::class, $this->following->updated_at);
+        $this->assertInstanceOf(Carbon::class, $this->following->created_at);
+        $this->assertInstanceOf(Carbon::class, $this->following->updated_at);
     }
 
     public function testScopeWithType(): void
     {
-        self::assertSame(1, Following::query()->withType(Channel::class)->count());
-        self::assertSame(0, Following::query()->withType(User::class)->count());
+        $this->assertSame(1, Following::query()->withType(Channel::class)->count());
+        $this->assertSame(0, Following::query()->withType(User::class)->count());
     }
 
     public function testGetTable(): void
     {
-        self::assertSame(config('follow.table_names.pivot'), $this->following->getTable());
+        $this->assertSame(config('follow.table_names.pivot'), $this->following->getTable());
     }
 
     public function testFollower(): void
     {
-        self::assertInstanceOf(User::class, $this->following->follower);
+        $this->assertInstanceOf(User::class, $this->following->follower);
     }
 
     public function testFollowable(): void
     {
-        self::assertInstanceOf(Channel::class, $this->following->followable);
+        $this->assertInstanceOf(Channel::class, $this->following->followable);
     }
 
     public function testUser(): void
     {
-        self::assertInstanceOf(User::class, $this->following->user);
+        $this->assertInstanceOf(User::class, $this->following->user);
     }
 
     public function testIsFollowedTo(): void
     {
-        self::assertTrue($this->following->isFollowedTo($this->channel));
-        self::assertFalse($this->following->isFollowedTo($this->user));
+        $this->assertTrue($this->following->isFollowedTo($this->channel));
+        $this->assertFalse($this->following->isFollowedTo($this->user));
     }
 
     public function testIsFollowedBy(): void
     {
-        self::assertFalse($this->following->isFollowedBy($this->channel));
-        self::assertTrue($this->following->isFollowedBy($this->user));
+        $this->assertFalse($this->following->isFollowedBy($this->channel));
+        $this->assertTrue($this->following->isFollowedBy($this->user));
     }
 }

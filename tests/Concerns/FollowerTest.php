@@ -86,8 +86,8 @@ final class FollowerTest extends TestCase
         $user = User::query()->create();
         $channel = Channel::query()->create();
         $user->toggleFollow($channel);
-        self::assertSame(1, $user->followerFollowings()->count());
-        self::assertSame(1, $user->followerFollowings->count());
+        $this->assertSame(1, $user->followerFollowings()->count());
+        $this->assertSame(1, $user->followerFollowings->count());
     }
 
     public function testHasFollowed(): void
@@ -95,10 +95,10 @@ final class FollowerTest extends TestCase
         $user = User::query()->create();
         $channel = Channel::query()->create();
         $user->toggleFollow($channel);
-        self::assertTrue($user->hasFollowed($channel));
+        $this->assertTrue($user->hasFollowed($channel));
         $user->toggleFollow($channel);
         $user->load('followerFollowings');
-        self::assertFalse($user->hasFollowed($channel));
+        $this->assertFalse($user->hasFollowed($channel));
     }
 
     public function testHasNotFollowed(): void
@@ -106,8 +106,8 @@ final class FollowerTest extends TestCase
         $user = User::query()->create();
         $channel = Channel::query()->create();
         $user->toggleFollow($channel);
-        self::assertFalse($user->hasNotFollowed($channel));
+        $this->assertFalse($user->hasNotFollowed($channel));
         $user->toggleFollow($channel);
-        self::assertTrue($user->hasNotFollowed($channel));
+        $this->assertTrue($user->hasNotFollowed($channel));
     }
 }

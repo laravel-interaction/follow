@@ -33,8 +33,8 @@ final class FollowableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->follow($model);
-        self::assertSame(1, $model->followableFollowings()->count());
-        self::assertSame(1, $model->followableFollowings->count());
+        $this->assertSame(1, $model->followableFollowings()->count());
+        $this->assertSame(1, $model->followableFollowings->count());
     }
 
     /**
@@ -47,11 +47,11 @@ final class FollowableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->follow($model);
-        self::assertSame(1, $model->followersCount());
+        $this->assertSame(1, $model->followersCount());
         $user->unfollow($model);
-        self::assertSame(1, $model->followersCount());
+        $this->assertSame(1, $model->followersCount());
         $model->loadCount('followers');
-        self::assertSame(0, $model->followersCount());
+        $this->assertSame(0, $model->followersCount());
     }
 
     /**
@@ -64,7 +64,7 @@ final class FollowableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->follow($model);
-        self::assertSame('1', $model->followersCountForHumans());
+        $this->assertSame('1', $model->followersCountForHumans());
     }
 
     /**
@@ -76,14 +76,14 @@ final class FollowableTest extends TestCase
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
-        self::assertFalse($model->isFollowedBy($model));
+        $this->assertFalse($model->isFollowedBy($model));
         $user->follow($model);
-        self::assertTrue($model->isFollowedBy($user));
+        $this->assertTrue($model->isFollowedBy($user));
         $model->load('followers');
         $user->unfollow($model);
-        self::assertTrue($model->isFollowedBy($user));
+        $this->assertTrue($model->isFollowedBy($user));
         $model->load('followers');
-        self::assertFalse($model->isFollowedBy($user));
+        $this->assertFalse($model->isFollowedBy($user));
     }
 
     /**
@@ -95,14 +95,14 @@ final class FollowableTest extends TestCase
     {
         $user = User::query()->create();
         $model = $modelClass::query()->create();
-        self::assertTrue($model->isNotFollowedBy($model));
+        $this->assertTrue($model->isNotFollowedBy($model));
         $user->follow($model);
-        self::assertFalse($model->isNotFollowedBy($user));
+        $this->assertFalse($model->isNotFollowedBy($user));
         $model->load('followers');
         $user->unfollow($model);
-        self::assertFalse($model->isNotFollowedBy($user));
+        $this->assertFalse($model->isNotFollowedBy($user));
         $model->load('followers');
-        self::assertTrue($model->isNotFollowedBy($user));
+        $this->assertTrue($model->isNotFollowedBy($user));
     }
 
     /**
@@ -115,9 +115,9 @@ final class FollowableTest extends TestCase
         $user = User::query()->create();
         $model = $modelClass::query()->create();
         $user->follow($model);
-        self::assertSame(1, $model->followers()->count());
+        $this->assertSame(1, $model->followers()->count());
         $user->unfollow($model);
-        self::assertSame(0, $model->followers()->count());
+        $this->assertSame(0, $model->followers()->count());
     }
 
     /**
@@ -131,8 +131,8 @@ final class FollowableTest extends TestCase
         $other = User::query()->create();
         $model = $modelClass::query()->create();
         $user->follow($model);
-        self::assertSame(1, $modelClass::query()->whereFollowedBy($user)->count());
-        self::assertSame(0, $modelClass::query()->whereFollowedBy($other)->count());
+        $this->assertSame(1, $modelClass::query()->whereFollowedBy($user)->count());
+        $this->assertSame(0, $modelClass::query()->whereFollowedBy($other)->count());
     }
 
     /**
@@ -146,10 +146,10 @@ final class FollowableTest extends TestCase
         $other = User::query()->create();
         $model = $modelClass::query()->create();
         $user->follow($model);
-        self::assertSame(
+        $this->assertSame(
             $modelClass::query()->whereKeyNot($model->getKey())->count(),
             $modelClass::query()->whereNotFollowedBy($user)->count()
         );
-        self::assertSame($modelClass::query()->count(), $modelClass::query()->whereNotFollowedBy($other)->count());
+        $this->assertSame($modelClass::query()->count(), $modelClass::query()->whereNotFollowedBy($other)->count());
     }
 }
