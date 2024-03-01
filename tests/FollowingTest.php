@@ -14,11 +14,11 @@ use LaravelInteraction\Follow\Tests\Models\User;
  */
 final class FollowingTest extends TestCase
 {
-    private \LaravelInteraction\Follow\Tests\Models\User $user;
+    private User $user;
 
-    private \LaravelInteraction\Follow\Tests\Models\Channel $channel;
+    private Channel $channel;
 
-    private \LaravelInteraction\Follow\Following $following;
+    private Following $following;
 
     protected function setUp(): void
     {
