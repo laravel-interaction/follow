@@ -34,7 +34,7 @@ final class FollowableTest extends TestCase
         $model = $modelClass::query()->create();
         $user->follow($model);
         $this->assertSame(1, $model->followableFollowings()->count());
-        $this->assertSame(1, $model->followableFollowings->count());
+        $this->assertCount(1, $model->followableFollowings);
     }
 
     /**

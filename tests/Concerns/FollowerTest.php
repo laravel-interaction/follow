@@ -87,7 +87,7 @@ final class FollowerTest extends TestCase
         $channel = Channel::query()->create();
         $user->toggleFollow($channel);
         $this->assertSame(1, $user->followerFollowings()->count());
-        $this->assertSame(1, $user->followerFollowings->count());
+        $this->assertCount(1, $user->followerFollowings);
     }
 
     public function testHasFollowed(): void
