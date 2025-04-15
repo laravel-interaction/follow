@@ -7,6 +7,7 @@ namespace LaravelInteraction\Follow\Tests\Concerns;
 use LaravelInteraction\Follow\Tests\Models\Channel;
 use LaravelInteraction\Follow\Tests\Models\User;
 use LaravelInteraction\Follow\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @internal
@@ -14,20 +15,11 @@ use LaravelInteraction\Follow\Tests\TestCase;
 final class FollowableTest extends TestCase
 {
     /**
-     * @return \Iterator<array<class-string<\LaravelInteraction\Follow\Tests\Models\Channel|\LaravelInteraction\Follow\Tests\Models\User>>>
-     */
-    public static function provideModelClasses(): \Iterator
-    {
-        yield [Channel::class];
-
-        yield [User::class];
-    }
-
-    /**
      * @dataProvider provideModelClasses
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testFollowings(string $modelClass): void
     {
         $user = User::query()->create();
@@ -42,6 +34,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testFollowersCount(string $modelClass): void
     {
         $user = User::query()->create();
@@ -59,6 +52,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testFollowersCountForHumans(string $modelClass): void
     {
         $user = User::query()->create();
@@ -72,6 +66,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testIsFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -91,6 +86,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testIsNotFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -110,6 +106,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testFollowers(string $modelClass): void
     {
         $user = User::query()->create();
@@ -125,6 +122,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testScopeWhereFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -140,6 +138,7 @@ final class FollowableTest extends TestCase
      *
      * @param class-string<\LaravelInteraction\Follow\Tests\Models\User|\LaravelInteraction\Follow\Tests\Models\Channel> $modelClass
      */
+    #[DataProvider('provideModelClasses')]
     public function testScopeWhereNotFollowedBy(string $modelClass): void
     {
         $user = User::query()->create();
@@ -151,5 +150,15 @@ final class FollowableTest extends TestCase
             $modelClass::query()->whereNotFollowedBy($user)->count()
         );
         $this->assertSame($modelClass::query()->count(), $modelClass::query()->whereNotFollowedBy($other)->count());
+    }
+
+    /**
+     * @return \Iterator<array<class-string<\LaravelInteraction\Follow\Tests\Models\Channel|\LaravelInteraction\Follow\Tests\Models\User>>>
+     */
+    public static function provideModelClasses(): \Iterator
+    {
+        yield [Channel::class];
+
+        yield [User::class];
     }
 }
